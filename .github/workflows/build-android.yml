@@ -1,0 +1,83 @@
+# This workflow builds the Flutter project for Android, both as APK and AAB
+# 
+# Required GitHub Secrets:
+# - KEY_STORE_PASSWORD: Password for the keystore
+# - KEY_PASSWORD: Password for the key
+# - KEY_ALIAS: Alias for the key
+# - KEY_STORE_BASE64: Base64 encoded keystore file
+#
+# How to create base64 encoded keystore:
+# Use command: base64 -w 0 your-keystore.jks > keystore-base64.txt
+# Then copy the content of keystore-base64.txt to KEY_STORE_BASE64 secret
+
+name: Build Android APK & AAB
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pub-cache
+            budget_simple/.dart_tool
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.10.0'
+
+      - name: Install dependencies
+        working-directory: ./budget_simple
+        run: flutter pub get
+
+      - name: Analyze code
+        working-directory: ./budget_simple
+        run: flutter analyze
+
+      - name: Run tests
+        working-directory: ./budget_simple
+        run: flutter test
+
+      - name: Run build_runner (for drift)
+        working-directory: ./budget_simple
+        run: flutter packages pub run build_runner build --delete-conflicting-outputs
+
+      - name: Create key.properties
+        working-directory: ./budget_simple/android
+        run: |
+          echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" >> key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> key.properties
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> key.properties
+          echo "storeFile=${{ github.workspace }}/budget_simple/android/upload-keystore.jks" >> key.properties
+
+      - name: Create keystore
+        working-directory: ./budget_simple/android
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > upload-keystore.jks
+
+      - name: Build APK
+        working-directory: ./budget_simple
+        run: flutter build apk --release
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: budget-simple-apk
+          path: budget_simple/build/app/outputs/flutter-apk/app-release.apk
