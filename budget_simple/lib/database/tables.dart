@@ -126,7 +126,9 @@ class TransactionsDatabase extends _$TransactionsDatabase {
           },
         ),
       );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
     }
     return (delete(transactions)
           ..where((transaction) => transaction.id.equals(id)))

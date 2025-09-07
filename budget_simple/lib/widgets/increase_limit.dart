@@ -215,7 +215,9 @@ class _IncreaseLimitState extends State<IncreaseLimit> {
                           "dismissedPopupAchieved", false);
                       sharedPreferences.setBool(
                           "dismissedPopupDoneOver", false);
-                      Navigator.pop(context);
+                      if (mounted) {
+                        Navigator.pop(context);
+                      }
                     }
                   },
                   child: const Icon(Icons.check)),

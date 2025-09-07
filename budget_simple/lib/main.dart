@@ -38,7 +38,7 @@ void main() async {
       systemTheme = SystemTheme.accentColor.accent;
     }
   } catch (e) {
-    print("Accent color error");
+
   }
   // Set up the initial spending goal
   try {
@@ -58,7 +58,7 @@ void main() async {
   tz.setLocalLocation(tz.getLocation(locationName));
   sharedPreferences = await SharedPreferences.getInstance();
   packageInfoGlobal = await PackageInfo.fromPlatform();
-  String? notificationPayload = await initializeNotifications();
+  await initializeNotifications();
   setSettings();
   dataSetTranslationsApp = await openAppTranslations();
   runApp(
@@ -99,7 +99,7 @@ setSettings() async {
   }
 }
 
-GlobalKey<_InitializeAppState> initializeAppStateKey = GlobalKey();
+GlobalKey<InitializeAppState> initializeAppStateKey = GlobalKey();
 
 class InitializeApp extends StatefulWidget {
   const InitializeApp({Key? key}) : super(key: key);
@@ -108,7 +108,7 @@ class InitializeApp extends StatefulWidget {
   State<InitializeApp> createState() => _InitializeAppState();
 }
 
-class _InitializeAppState extends State<InitializeApp> {
+class InitializeAppState extends State<InitializeApp> {
   void refreshAppState() {
     setState(() {});
     // print("Rebuilt");

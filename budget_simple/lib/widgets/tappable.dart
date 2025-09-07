@@ -59,7 +59,7 @@ class Tappable extends StatelessWidget {
     //   ),
     //   child: tappable,
     // );
-    Future<void> _onPointerDown(PointerDownEvent event) async {
+    Future<void> onPointerDown(PointerDownEvent event) async {
       // Check if right mouse button clicked
       if (event.kind == PointerDeviceKind.mouse &&
           event.buttons == kSecondaryMouseButton) {

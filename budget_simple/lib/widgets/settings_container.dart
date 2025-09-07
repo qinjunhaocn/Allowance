@@ -152,6 +152,7 @@ class _SettingsContainerSwitchState extends State<SettingsContainerSwitch> {
 
   @override
   void didUpdateWidget(Widget oldWidget) {
+    super.didUpdateWidget(oldWidget);
     if (widget.initialValue != value && widget.syncWithInitialValue) {
       setState(() {
         value = widget.initialValue;
@@ -258,7 +259,7 @@ class SettingsContainerDropdown extends StatefulWidget {
 }
 
 class _SettingsContainerDropdownState extends State<SettingsContainerDropdown> {
-  late final GlobalKey<DropdownSelectState>? _dropdownKey = GlobalKey();
+  late final GlobalKey<DropdownSelectState> _dropdownKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {

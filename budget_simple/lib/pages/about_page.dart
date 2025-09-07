@@ -307,7 +307,9 @@ class _NotificationSettingsState extends State<NotificationSettings> {
                     sharedPreferences.setString("notificationsTime",
                         "${newTime.hour}:${newTime.minute}");
                     setState(() {});
-                    setDailyNotificationOnLaunch(context);
+                    if (mounted) {
+                      setDailyNotificationOnLaunch(context);
+                    }
                   },
                 )
               : Container(),

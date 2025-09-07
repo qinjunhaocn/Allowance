@@ -12,7 +12,7 @@ class AnimatedScaleBounce extends StatefulWidget {
   _AnimatedScaleBounceState createState() => _AnimatedScaleBounceState();
 }
 
-class _AnimatedScaleBounceState extends State<AnimatedScaleBounce>
+class AnimatedScaleBounceState extends State<AnimatedScaleBounce>
     with TickerProviderStateMixin {
   double squareScaleA = 1;
   late AnimationController _controllerA;

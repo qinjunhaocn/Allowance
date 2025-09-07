@@ -1,12 +1,7 @@
 import 'dart:async';
-import 'dart:developer';
 
-import 'package:budget_simple/pages/about_page.dart';
 import 'package:budget_simple/struct/functions.dart';
-import 'package:budget_simple/widgets/plasma_render.dart';
 import 'package:budget_simple/widgets/settings_container.dart';
-import 'package:budget_simple/widgets/tappable.dart';
-import 'package:budget_simple/widgets/text_font.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';

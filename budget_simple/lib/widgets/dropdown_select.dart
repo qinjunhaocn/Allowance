@@ -45,7 +45,7 @@ class DropdownSelectState extends State<DropdownSelect> {
       });
     }
 
-    searchForGestureDetector(_dropdownButtonKey?.currentContext);
+    searchForGestureDetector(_dropdownButtonKey.currentContext);
     assert(detector != null);
 
     detector?.onTap?.call();

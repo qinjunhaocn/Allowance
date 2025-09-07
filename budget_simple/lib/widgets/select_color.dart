@@ -15,10 +15,10 @@ class SelectColor extends StatefulWidget {
   final bool includeThemeColor;
 
   @override
-  _SelectColorState createState() => _SelectColorState();
+  SelectColorState createState() => SelectColorState();
 }
 
-class _SelectColorState extends State<SelectColor> {
+class SelectColorState extends State<SelectColor> {
   Color? selectedColor;
   int? selectedIndex;
 

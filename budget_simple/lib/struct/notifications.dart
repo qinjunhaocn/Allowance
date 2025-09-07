@@ -38,7 +38,7 @@ Future<bool> initializeNotificationsPlatform() async {
   }
   bool result = await checkNotificationsPermissionAll();
   if (result) {
-    print("Notifications initialized");
+    // print("Notifications initialized");
     return true;
   } else {
     return false;
@@ -72,7 +72,7 @@ Future<bool> checkNotificationsPermissionAll() async {
     if (Platform.isAndroid) return await checkNotificationsPermissionAndroid();
     if (Platform.isIOS) return await checkNotificationsPermissionIOS();
   } catch (e) {
-    print("Error setting up notifications: $e");
+    // print("Error setting up notifications: $e");
     return false;
   }
   return false;
@@ -130,20 +130,19 @@ Future<bool> scheduleDailyNotification(context, TimeOfDay timeOfDay) async {
       translateText("Don't forget to add transactions to Allowance"),
       dateTime,
       notificationDetails,
-      androidAllowWhileIdle: true,
       payload: 'addTransaction',
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.dateAndTime,
-      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+      androidScheduleMode: AndroidNotificationScheduleMode.inexactAllowWhileIdle,
     );
-    print("Notification scheduled for $dateTime with id $i");
+    // print("Notification scheduled for $dateTime with id $i");
   }
   // print(await flutterLocalNotificationsPlugin.getActiveNotifications());
 
   final List<PendingNotificationRequest> pendingNotificationRequests =
       await flutterLocalNotificationsPlugin.pendingNotificationRequests();
-  print(pendingNotificationRequests.first.body);
+  // print(pendingNotificationRequests.first.body);
 
   return true;
 }

@@ -84,7 +84,7 @@ class _SpendingTrajectoryState extends State<SpendingTrajectory> {
                           top: 3, right: 5, left: 5, bottom: 3),
                       child: MediaQuery(
                         data: MediaQuery.of(context)
-                            .copyWith(textScaleFactor: 1.0),
+                            .copyWith(textScaler: TextScaler.linear(1.0)),
                         child: TextFont(
                           textAlign: TextAlign.center,
                           text: "Today",

@@ -7,10 +7,10 @@ class FloatingWidget extends StatefulWidget {
   final Duration duration;
 
   @override
-  _FloatingWidgetState createState() => _FloatingWidgetState();
+  FloatingWidgetState createState() => FloatingWidgetState();
 }
 
-class _FloatingWidgetState extends State<FloatingWidget>
+class FloatingWidgetState extends State<FloatingWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<Offset> _animation;

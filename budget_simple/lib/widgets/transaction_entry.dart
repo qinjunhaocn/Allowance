@@ -16,73 +16,75 @@ class TransactionEntry extends StatelessWidget {
     NumberFormat currency = getNumberFormat();
     return Tappable(
       onTap: () async {
-        String? result = await showDialog<String>(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-            title: const TextFont(
-              text: 'Delete Transaction?',
-              fontSize: 23,
-              maxLines: 3,
-            ),
-            content: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextFont(
-                    maxLines: 2,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    text: currency
-                        .format(removeNegativeZero(transaction.amount * -1)),
-                    textColor: getTransactionAmountColor(
-                        context, transaction.amount * -1),
+            if (mounted) {
+              String? result = await showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: const TextFont(
+                    text: 'Delete Transaction?',
+                    fontSize: 23,
+                    maxLines: 3,
                   ),
-                  const SizedBox(height: 3),
-                  TextFont(
-                    maxLines: 2,
-                    fontSize: 16,
-                    text: DateFormat('MMM d, yyyy')
-                        .format(transaction.dateCreated),
-                  ),
-                  const SizedBox(height: 3),
-                  transaction.name != ""
-                      ? TextFont(
-                          text: transaction.name,
-                          fontSize: 16,
+                  content: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextFont(
                           maxLines: 2,
-                        )
-                      : const SizedBox.shrink(),
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.pop(context, 'Cancel'),
-                child: TextFont(
-                  text: 'Cancel',
-                  textColor: Theme.of(context).colorScheme.primary,
-                  fontSize: 15,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          text: currency
+                              .format(removeNegativeZero(transaction.amount * -1)),
+                          textColor: getTransactionAmountColor(
+                              context, transaction.amount * -1),
+                        ),
+                        const SizedBox(height: 3),
+                        TextFont(
+                          maxLines: 2,
+                          fontSize: 16,
+                          text: DateFormat('MMM d, yyyy')
+                              .format(transaction.dateCreated),
+                        ),
+                        const SizedBox(height: 3),
+                        transaction.name != ""
+                            ? TextFont(
+                                text: transaction.name,
+                                fontSize: 16,
+                                maxLines: 2,
+                              )
+                            : const SizedBox.shrink(),
+                      ],
+                    ),
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'Cancel'),
+                      child: TextFont(
+                        text: 'Cancel',
+                        textColor: Theme.of(context).colorScheme.primary,
+                        fontSize: 15,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'Delete'),
+                      child: TextFont(
+                        text: 'Delete',
+                        textColor: Theme.of(context).colorScheme.error,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              TextButton(
-                onPressed: () => Navigator.pop(context, 'Delete'),
-                child: TextFont(
-                  text: 'Delete',
-                  textColor: Theme.of(context).colorScheme.error,
-                  fontSize: 15,
-                ),
-              ),
-            ],
-          ),
-        );
-        if (result == "Delete") {
-          await database.deleteTransaction(
-            transaction.id,
-            context: context,
-          );
-        }
-      },
+              );
+            }
+            if (result == "Delete" && mounted) {
+              await database.deleteTransaction(
+                transaction.id,
+                context: context,
+              );
+            }
+          },","}]}
       child: Column(
         children: [
           ConstrainedBox(
