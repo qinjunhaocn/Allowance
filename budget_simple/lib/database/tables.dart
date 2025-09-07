@@ -1,7 +1,9 @@
 import 'dart:convert';
 
-import 'package:budget_simple/struct/database_global.dart';
+
+
 import 'package:budget_simple/struct/functions.dart';
+import 'package:budget_simple/struct/database_global.dart';
 import 'package:budget_simple/struct/translations.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter/material.dart' hide Table;
@@ -73,7 +75,7 @@ class TransactionsDatabase extends _$TransactionsDatabase {
               ? const Constant(true)
               : tbl.name.lower().like("%${searchTerm.toLowerCase()}%"))
           ..orderBy([(t) => OrderingTerm.desc(t.dateCreated)])
-          ..limit(limit ?? DEFAULT_LIMIT))
+          ..limit(limit ?? DatabaseGlobal.defaultLimit))
         .watch();
   }
 
@@ -88,8 +90,8 @@ class TransactionsDatabase extends _$TransactionsDatabase {
   }
 
   Future<int> createOrUpdateSpendingLimit(SpendingLimitData spendingLimit) {
-    if (spendingLimit.amount > MAX_AMOUNT) {
-      spendingLimit = spendingLimit.copyWith(amount: MAX_AMOUNT - 1);
+    if (spendingLimit.amount > DatabaseGlobal.maxAmount) {
+      spendingLimit = spendingLimit.copyWith(amount: DatabaseGlobal.maxAmount - 1);
     }
     return into($SpendingLimitTable(attachedDatabase))
         .insertOnConflictUpdate(spendingLimit);
@@ -126,8 +128,7 @@ class TransactionsDatabase extends _$TransactionsDatabase {
           },
         ),
       );
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
       }
     }
     return (delete(transactions)

@@ -4,7 +4,7 @@ import 'package:budget_simple/struct/database_global.dart';
 import 'package:budget_simple/struct/translations.dart';
 import 'package:budget_simple/widgets/page_framework.dart';
 import 'package:budget_simple/widgets/text_font.dart';
-import 'package:budget_simple/widgets/transaction_entry.dart';
+import 'package:budget_simple/widgets/transaction_entry.dart' as te;
 import 'package:flutter/material.dart';
 import 'package:implicitly_animated_list/implicitly_animated_list.dart';
 
@@ -35,7 +35,7 @@ class TransactionsList extends StatefulWidget {
 
 class _TransactionsListState extends State<TransactionsList> {
   late ScrollController _scrollController;
-  int amountLoaded = DEFAULT_LIMIT;
+  int amountLoaded = DatabaseGlobal.defaultLimit;
   String? searchTerm;
   FocusNode focusNodeTextInput = FocusNode();
 
@@ -68,7 +68,7 @@ class _TransactionsListState extends State<TransactionsList> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Column(mainAxisSize: MainAxisSize.min,
       mainAxisSize: MainAxisSize.min,
       children: [
         TextField(

@@ -134,14 +134,13 @@ Future<bool> scheduleDailyNotification(context, TimeOfDay timeOfDay) async {
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.dateAndTime,
-      androidScheduleMode: AndroidNotificationScheduleMode.inexactAllowWhileIdle,
+      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
     );
     // print("Notification scheduled for $dateTime with id $i");
   }
   // print(await flutterLocalNotificationsPlugin.getActiveNotifications());
 
-  final List<PendingNotificationRequest> pendingNotificationRequests =
-      await flutterLocalNotificationsPlugin.pendingNotificationRequests();
+  // Removed unused variable: pendingNotificationRequests
   // print(pendingNotificationRequests.first.body);
 
   return true;

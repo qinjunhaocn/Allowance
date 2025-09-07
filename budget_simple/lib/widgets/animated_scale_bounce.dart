@@ -9,7 +9,7 @@ class AnimatedScaleBounce extends StatefulWidget {
   final Widget child;
   final double? animationScale;
   @override
-  _AnimatedScaleBounceState createState() => _AnimatedScaleBounceState();
+  AnimatedScaleBounceState createState() => AnimatedScaleBounceState();
 }
 
 class AnimatedScaleBounceState extends State<AnimatedScaleBounce>

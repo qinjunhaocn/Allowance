@@ -16,7 +16,6 @@ class TransactionEntry extends StatelessWidget {
     NumberFormat currency = getNumberFormat();
     return Tappable(
       onTap: () async {
-            if (mounted) {
               String? result = await showDialog<String>(
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
@@ -77,8 +76,7 @@ class TransactionEntry extends StatelessWidget {
                   ],
                 ),
               );
-            }
-            if (result == "Delete" && mounted) {
+            if (result == "Delete") {
               await database.deleteTransaction(
                 transaction.id,
                 context: context,

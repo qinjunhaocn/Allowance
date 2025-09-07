@@ -154,8 +154,8 @@ class HomePageState extends State<HomePage> {
       }
     } else if (action == ">") {
       if (amountCalculated != "") {
-        if ((double.tryParse(amountCalculated) ?? 0) > MAX_AMOUNT) {
-          amountCalculated = MAX_AMOUNT.toString();
+        if ((double.tryParse(amountCalculated) ?? 0) > maxAmount) {
+          amountCalculated = databaseGlobal.maxAmount.toString();
         }
         await database.createTransaction(
           TransactionsCompanion.insert(

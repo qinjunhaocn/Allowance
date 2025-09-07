@@ -38,8 +38,8 @@ void main() async {
       systemTheme = SystemTheme.accentColor.accent;
     }
   } catch (e) {
-
-  }
+  // Handle system theme loading error
+}
   // Set up the initial spending goal
   try {
     await database.getSpendingLimit();
@@ -105,7 +105,7 @@ class InitializeApp extends StatefulWidget {
   const InitializeApp({Key? key}) : super(key: key);
 
   @override
-  State<InitializeApp> createState() => _InitializeAppState();
+  State<InitializeApp> createState() => InitializeAppState();
 }
 
 class InitializeAppState extends State<InitializeApp> {
