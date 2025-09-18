@@ -31,12 +31,14 @@ jobs:
         run: |
           flutter pub get
           flutter doctor
+        working-directory: budget_simple
 
       - name: Build APK
         run: flutter build apk --release
+        working-directory: budget_simple
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: App APK
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: budget_simple/build/app/outputs/flutter-apk/app-release.apk
