@@ -13,15 +13,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Set up Git
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
-
-      - name: Clone Repository
-        run: |
-          git clone https://github.com/qinjunhaocn/Allowance.git
-          cd Allowance
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -41,4 +39,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: App APK
-          path: Allowance/build/app/outputs/flutter-apk/app-release.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
