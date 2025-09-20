@@ -1,14 +1,14 @@
 name: Flutter CI
 
 on:
-  # 手动触发
+  push:
+    branches: [ main ]
   workflow_dispatch:
     inputs:
       flutterVersion:
         description: 'Flutter SDK version'
         required: false
         default: '3.19.6'
-
 
 jobs:
   build:
@@ -26,8 +26,8 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
-          flutter-version: ${{ github.event.inputs.flutterVersion }}
+          channel: stable
+          flutter-version: ${{ github.event.inputs.flutterVersion || '3.19.6' }}
 
       - name: Cache Flutter dependencies
         uses: actions/cache@v3
