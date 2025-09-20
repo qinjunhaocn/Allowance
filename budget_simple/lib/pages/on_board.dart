@@ -113,7 +113,7 @@ class OnBoardingPageBodyState extends State<OnBoardingPageBody> {
               Stack(
                 children: [
                   FloatingWidget(
-                    duration: const Duration(milliseconds: 1650),
+                    duration: const Duration(milliseconds: 500),
                     child: Transform.translate(
                       offset: const Offset(-5, 50),
                       child: Transform.rotate(
@@ -129,7 +129,7 @@ class OnBoardingPageBodyState extends State<OnBoardingPageBody> {
                     ),
                   ),
                   FloatingWidget(
-                    duration: const Duration(milliseconds: 2000),
+                    duration: const Duration(milliseconds: 600),
                     child: Transform.translate(
                       offset: const Offset(80, 0),
                       child: Transform.rotate(
@@ -294,7 +294,7 @@ class OnBoardingPageBodyState extends State<OnBoardingPageBody> {
           ),
           const SizedBox(height: 20),
           FloatingWidget(
-            duration: const Duration(milliseconds: 2100),
+            duration: const Duration(milliseconds: 600),
             child: Transform.translate(
               offset: const Offset(0, 0),
               child: Transform.rotate(
@@ -333,7 +333,7 @@ class OnBoardingPageBodyState extends State<OnBoardingPageBody> {
           ),
           const SizedBox(height: 40),
           FloatingWidget(
-            duration: const Duration(milliseconds: 2100),
+            duration: const Duration(milliseconds: 600),
             child: Transform.translate(
               offset: const Offset(0, 0),
               child: Transform.rotate(
@@ -379,11 +379,11 @@ class OnBoardingPageBodyState extends State<OnBoardingPageBody> {
                   children: [
                     AnimatedOpacity(
                       opacity: currentIndex <= 0 ? 0 : 1,
-                      duration: const Duration(milliseconds: 200),
+                      duration: const Duration(milliseconds: 100),
                       child: IconButton(
                         onPressed: () {
                           controller.previousPage(
-                            duration: const Duration(milliseconds: 1100),
+                            duration: const Duration(milliseconds: 300),
                             curve: const ElasticOutCurve(1.3),
                           );
                           FocusScopeNode currentFocus = FocusScope.of(context);
@@ -410,11 +410,11 @@ class OnBoardingPageBodyState extends State<OnBoardingPageBody> {
                                   Builder(
                                 builder: (BuildContext context) =>
                                     AnimatedScale(
-                                  duration: const Duration(milliseconds: 900),
+                                  duration: const Duration(milliseconds: 300),
                                   scale: index - 1 == currentIndex ? 1.3 : 1,
                                   curve: const ElasticOutCurve(0.2),
                                   child: AnimatedSwitcher(
-                                    duration: const Duration(milliseconds: 400),
+                                    duration: const Duration(milliseconds: 150),
                                     child: Container(
                                       key: ValueKey(index - 1 == currentIndex),
                                       width: 6,
@@ -444,7 +444,7 @@ class OnBoardingPageBodyState extends State<OnBoardingPageBody> {
                     IconButton(
                       onPressed: () {
                         controller.nextPage(
-                          duration: const Duration(milliseconds: 1100),
+                          duration: const Duration(milliseconds: 300),
                           curve: const ElasticOutCurve(1.3),
                         );
                         FocusScopeNode currentFocus = FocusScope.of(context);

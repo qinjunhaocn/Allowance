@@ -44,10 +44,10 @@ class _SpendingTrajectoryState extends State<SpendingTrajectory> {
               widthFactor: loaded ? widget.percent : 0,
               alignment: Alignment.bottomLeft,
               heightFactor: 1,
-              duration: const Duration(milliseconds: 2000),
+              duration: const Duration(milliseconds: 500),
               curve: Curves.easeInOutCubicEmphasized,
               child: AnimatedContainer(
-                duration: const Duration(milliseconds: 2500),
+                duration: const Duration(milliseconds: 600),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.horizontal(
                       right: loaded == true && widget.percent >= 1

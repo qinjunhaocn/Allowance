@@ -10,8 +10,8 @@ pushRoute(BuildContext context, Widget page, {Offset? customOffset}) {
     context,
     PageRouteBuilder(
       opaque: false,
-      transitionDuration: const Duration(milliseconds: 400),
-      reverseTransitionDuration: const Duration(milliseconds: 400),
+      transitionDuration: const Duration(milliseconds: 150),
+      reverseTransitionDuration: const Duration(milliseconds: 150),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         Offset begin = customOffset ?? const Offset(0.0, 1.0);
         Offset end = Offset.zero;

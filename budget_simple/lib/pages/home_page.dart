@@ -311,11 +311,11 @@ class HomePageState extends State<HomePage> {
                           child: Column(
                             children: [
                               AnimatedSize(
-                                duration: const Duration(milliseconds: 700),
+                                duration: const Duration(milliseconds: 300),
                                 clipBehavior: Clip.none,
                                 curve: Curves.elasticOut,
                                 child: AnimatedSwitcher(
-                                  duration: const Duration(milliseconds: 900),
+                                  duration: const Duration(milliseconds: 400),
                                   switchInCurve: const ElasticOutCurve(0.6),
                                   switchOutCurve: const ElasticInCurve(0.6),
                                   transitionBuilder: (Widget child,
@@ -352,7 +352,7 @@ class HomePageState extends State<HomePage> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: AnimatedSwitcher(
-                                  duration: const Duration(milliseconds: 200),
+                                  duration: const Duration(milliseconds: 100),
                                   child: amount < 0
                                       ? TextFont(
                                           key: ValueKey(amount),
@@ -399,7 +399,7 @@ class HomePageState extends State<HomePage> {
           child: Align(
             alignment: Alignment.bottomRight,
             child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: 200),
               switchInCurve: Curves.elasticOut,
               switchOutCurve: Curves.easeInOutCubicEmphasized,
               transitionBuilder: (Widget child, Animation<double> animation) {
@@ -417,7 +417,7 @@ class HomePageState extends State<HomePage> {
               },
               child: AnimatedSize(
                 key: ValueKey(formattedOutput == ""),
-                duration: const Duration(milliseconds: 700),
+                duration: const Duration(milliseconds: 300),
                 clipBehavior: Clip.none,
                 curve: Curves.elasticOut,
                 child: SizedBox(
@@ -673,49 +673,50 @@ class HomePageState extends State<HomePage> {
                     const SizedBox(height: 10),
                     amountButtonsTopWidget,
                     amountButtonsBottomWidget,
-                    StreamBuilder<SpendingLimitData>(
-                      stream: database.watchSpendingLimit(),
-                      builder: (context, snapshot) {
-                        if (snapshot.data == null) {
-                          return const SizedBox();
-                        }
-                        double amountForPeriod = snapshot.data!.amount;
-                        return StreamBuilder<double?>(
-                          stream: database
-                              .totalSpendAfterDay(snapshot.data!.dateCreated),
-                          builder: (context, snapshotTotalSpent) {
-                            DateTime currentDate = DateTime.now();
-                            double amount = snapshot.data!.amount -
-                                (snapshotTotalSpent.data ?? 0);
-                            double percentSpent =
-                                1 - (amount / amountForPeriod).abs();
-                            if (percentSpent > 1 || amount < 0) {
-                              percentSpent = 1;
-                            } else if (percentSpent < 0) {
-                              percentSpent = 0;
-                            }
-                            double percentToday = 1 -
-                                (snapshot.data!.dateCreatedUntil
-                                            .millisecondsSinceEpoch -
-                                        currentDate.millisecondsSinceEpoch) /
-                                    (snapshot.data!.dateCreatedUntil
-                                            .millisecondsSinceEpoch -
-                                        snapshot.data!.dateCreated
-                                            .millisecondsSinceEpoch);
-                            if (percentToday > 1) {
-                              percentToday = 1;
-                            } else if (percentToday < 0) {
-                              percentToday = 0;
-                            }
-                            return SpendingTrajectory(
-                              height: 50,
-                              percent: percentSpent,
-                              todayPercent: percentToday,
-                            );
-                          },
-                        );
-                      },
-                    ),
+                    // 注释掉today进度条
+                    // StreamBuilder<SpendingLimitData>(
+                    //   stream: database.watchSpendingLimit(),
+                    //   builder: (context, snapshot) {
+                    //     if (snapshot.data == null) {
+                    //       return const SizedBox();
+                    //     }
+                    //     double amountForPeriod = snapshot.data!.amount;
+                    //     return StreamBuilder<double?>(
+                    //       stream: database
+                    //           .totalSpendAfterDay(snapshot.data!.dateCreated),
+                    //       builder: (context, snapshotTotalSpent) {
+                    //         DateTime currentDate = DateTime.now();
+                    //         double amount = snapshot.data!.amount -
+                    //             (snapshotTotalSpent.data ?? 0);
+                    //         double percentSpent = 
+                    //             1 - (amount / amountForPeriod).abs();
+                    //         if (percentSpent > 1 || amount < 0) {
+                    //           percentSpent = 1;
+                    //         } else if (percentSpent < 0) {
+                    //           percentSpent = 0;
+                    //         }
+                    //         double percentToday = 1 -
+                    //             (snapshot.data!.dateCreatedUntil
+                    //                         .millisecondsSinceEpoch -
+                    //                     currentDate.millisecondsSinceEpoch) /
+                    //                 (snapshot.data!.dateCreatedUntil
+                    //                         .millisecondsSinceEpoch -
+                    //                     snapshot.data!.dateCreated
+                    //                         .millisecondsSinceEpoch);
+                    //         if (percentToday > 1) {
+                    //           percentToday = 1;
+                    //         } else if (percentToday < 0) {
+                    //           percentToday = 0;
+                    //         }
+                    //         return SpendingTrajectory(
+                    //           height: 50,
+                    //           percent: percentSpent,
+                    //           todayPercent: percentToday,
+                    //         );
+                    //       },
+                    //     );
+                    //   },
+                    // ),
                   ],
                 ),
               ),

@@ -145,7 +145,7 @@ class App extends StatelessWidget {
         }
         return child ?? const SizedBox.shrink();
       },
-      themeAnimationDuration: const Duration(milliseconds: 1000),
+      themeAnimationDuration: const Duration(milliseconds: 300),
       title: 'Allowance',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
@@ -179,7 +179,7 @@ class App extends StatelessWidget {
         top: false,
         bottom: false,
         child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 1200),
+          duration: const Duration(milliseconds: 500),
           switchInCurve: Curves.easeInOutCubic,
           switchOutCurve: Curves.easeInOutCubic,
           transitionBuilder: (Widget child, Animation<double> animation) {
