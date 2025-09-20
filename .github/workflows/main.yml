@@ -53,5 +53,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: APK Files
-          path: budget_simple/build/app/outputs/flutter-apk/*.apk
+          path: budget_simple/build/app/outputs/flutter-apk/app-profile.apk
           retention-days: 14
