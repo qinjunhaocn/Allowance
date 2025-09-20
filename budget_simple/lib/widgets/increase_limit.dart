@@ -119,6 +119,7 @@ class _IncreaseLimitState extends State<IncreaseLimit> {
               ),
             ),
             const SizedBox(width: 5),
+            /* 以下代码已注释掉
             const TextFont(text: "until"),
             const SizedBox(width: 5),
             Tappable(
@@ -174,6 +175,7 @@ class _IncreaseLimitState extends State<IncreaseLimit> {
               ],
             ),
             const SizedBox(width: 5),
+            */
           ],
         ),
         const SizedBox(height: 25),
