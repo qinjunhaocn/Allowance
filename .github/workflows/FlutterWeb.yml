@@ -1,0 +1,66 @@
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      flutterVersion:
+        description: 'Flutter SDK version'
+        required: false
+        default: '3.19.6'
+
+jobs:
+  build-web:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Git
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: ${{ github.event.inputs.flutterVersion || '3.19.6' }}
+
+      - name: Enable Flutter Web
+        run: flutter config --enable-web
+
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.pub-cache
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: ${{ runner.os }}-flutter-
+
+      - name: Install Dependencies
+        run: |
+          flutter pub get
+          flutter doctor
+        working-directory: budget_simple
+
+      - name: Build Web App
+        run: flutter build web --release
+        working-directory: budget_simple
+
+      - name: Upload Web Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Web Build
+          path: budget_simple/build/web/
+          retention-days: 14
+
+      - name: Deploy to GitHub Pages
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: budget_simple/build/web
+          publish_branch: gh-pages
+          force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
