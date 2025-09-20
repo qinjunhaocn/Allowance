@@ -34,7 +34,7 @@ class ChangeCurrencyIcon extends StatelessWidget {
           onFieldSubmitted: (value) {
             currencyIcon = value;
             if (value.trim() == "") {
-              currencyIcon = "\$";
+              currencyIcon = "\¥";
             }
             sharedPreferences.setString("currencyIcon", value);
             initializeAppStateKey.currentState?.refreshAppState();

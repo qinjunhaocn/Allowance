@@ -71,7 +71,7 @@ void main() async {
 
 setSettings() async {
   currencyIcon = sharedPreferences.getString("currencyIcon") ?? "\¥";
-  notifications = sharedPreferences.getBool("notifications") ?? true;
+  notifications = sharedPreferences.getBool("notifications") ?? false;
   String notificationsTimeStr =
       sharedPreferences.getString("notificationsTime") ?? "16:00";
   notificationsTime = TimeOfDay(

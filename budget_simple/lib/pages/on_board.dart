@@ -248,7 +248,7 @@ class OnBoardingPageBodyState extends State<OnBoardingPageBody> {
                   onChanged: (value) {
                     currencyIcon = value;
                     if (value.trim() == "") {
-                      currencyIcon = "\$";
+                      currencyIcon = "\¥";
                     }
                     sharedPreferences.setString("currencyIcon", value);
                   },

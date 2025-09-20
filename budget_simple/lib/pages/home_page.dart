@@ -365,17 +365,7 @@ class HomePageState extends State<HomePage> {
                                           maxLines: 2,
                                           textAlign: TextAlign.center,
                                         )
-                                      : TextFont(
-                                          key: ValueKey(amount),
-                                          text:
-                                              "${currency.format(amount.abs() / moreDays)}/${translateText("day")} ${translateText("for")} $moreDays ${translateText("more")} ${moreDays == 1 ? translateText("day") : translateText("days")}",
-                                          fontSize: 17,
-                                          maxLines: 3,
-                                          textAlign: TextAlign.center,
-                                          textColor: Theme.of(context)
-                                              .colorScheme
-                                              .tertiary,
-                                        ),
+                                      : const SizedBox.shrink(), // 注释掉'为了xxx更多的天'文本
                                 ),
                               ),
                             ],
