@@ -23,7 +23,7 @@ class ChangeCurrencyIcon extends StatelessWidget {
         child: TextFormField(
           maxLength: 5,
           decoration: InputDecoration(
-            hintText: currencyIcon,
+            hintText: "\¥", // 使用固定的人民币符号作为提示文本
             counterText: "",
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 10.0,

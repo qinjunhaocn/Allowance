@@ -237,7 +237,7 @@ class OnBoardingPageBodyState extends State<OnBoardingPageBody> {
                   initialValue: currencyIcon,
                   maxLength: 5,
                   decoration: const InputDecoration(
-                    hintText: "\$",
+                    hintText: "\¥",
                     counterText: "",
                     contentPadding: EdgeInsets.symmetric(
                       horizontal: 10.0,
