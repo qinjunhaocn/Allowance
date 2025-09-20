@@ -222,4 +222,10 @@ class ScrollBehavior extends MaterialScrollBehavior {
         PointerDeviceKind.touch,
         PointerDeviceKind.mouse,
       };
+      
+  @override
+  ScrollPhysics getScrollPhysics(BuildContext context) {
+    // 禁用所有滚动效果
+    return const NeverScrollableScrollPhysics();
+  }
 }
