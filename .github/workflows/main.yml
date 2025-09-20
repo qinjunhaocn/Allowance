@@ -1,12 +1,17 @@
 name: Flutter CI
 
 on:
+  # 手动触发
   workflow_dispatch:
     inputs:
       flutterVersion:
         description: 'Flutter SDK version'
         required: false
         default: '3.19.6'
+  # Push 事件触发（可根据实际分支名称调整）
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -41,7 +46,7 @@ jobs:
         working-directory: budget_simple
 
       - name: Build Debug APK
-        run: flutter build apk --debug
+        run: flutter build apk --profile
         working-directory: budget_simple
 
       - name: Upload Debug APK
