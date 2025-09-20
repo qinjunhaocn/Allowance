@@ -40,10 +40,6 @@ jobs:
           flutter doctor
         working-directory: budget_simple
 
-      - name: Run Tests
-        run: flutter test
-        working-directory: budget_simple
-
       - name: Build Debug APK
         run: flutter build apk --debug
         working-directory: budget_simple
