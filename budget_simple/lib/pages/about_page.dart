@@ -34,58 +34,59 @@ class AboutPage extends StatelessWidget {
           controller: scrollController,
           child: Column(
             children: [
-              if (Platform.isIOS == false) const CashewPromo(),
-              if (Platform.isIOS == false) const SizedBox(height: 5),
-              if (Platform.isIOS == false)
-                const TextFont(
-                  text: "From the same developer!",
-                  fontSize: 15,
-                ),
-              if (Platform.isIOS == false) const SizedBox(height: 10),
-              if (Platform.isIOS == false) const SupportDeveloper(),
+              // 以下内容已注释掉
+              // if (Platform.isIOS == false) const CashewPromo(),
+              // if (Platform.isIOS == false) const SizedBox(height: 5),
+              // if (Platform.isIOS == false)
+              //   const TextFont(
+              //     text: "From the same developer!",
+              //     fontSize: 15,
+              //   ),
+              // if (Platform.isIOS == false) const SizedBox(height: 10),
+              // if (Platform.isIOS == false) const SupportDeveloper(),
+              // // kIsWeb
+              // //     ? const SizedBox.shrink()
+              // //     : SettingsContainer(
+              // //         title: "Rate",
+              // //         afterWidget: const Icon(
+              // //           Icons.arrow_forward_ios_rounded,
+              // //           size: 17,
+              // //         ),
+              // //         icon: Icons.star_border,
+              // //         onTap: () async {
+              // //           if (await inAppReview.isAvailable()) {
+              // //             inAppReview.requestReview();
+              // //           } else {
+              // //             inAppReview.openStoreListing();
+              // //           }
+              // //         },
+              // //       ),
               // kIsWeb
-              //     ? const SizedBox.shrink()
-              //     : SettingsContainer(
-              //         title: "Rate",
-              //         afterWidget: const Icon(
-              //           Icons.arrow_forward_ios_rounded,
-              //           size: 17,
-              //         ),
-              //         icon: Icons.star_border,
-              //         onTap: () async {
-              //           if (await inAppReview.isAvailable()) {
-              //             inAppReview.requestReview();
-              //           } else {
-              //             inAppReview.openStoreListing();
-              //           }
-              //         },
+              //   ? SettingsContainer(
+              //       title: "Donate",
+              //       afterWidget: const Icon(
+              //         Icons.arrow_forward_ios_rounded,
+              //         size: 17,
               //       ),
-              kIsWeb
-                  ? SettingsContainer(
-                      title: "Donate",
-                      afterWidget: const Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        size: 17,
-                      ),
-                      icon: Icons.thumb_up_alt_outlined,
-                      onTap: () {
-                        kIsWeb
-                            ? openUrl("https://ko-fi.com/dapperappdeveloper")
-                            : null;
-                      },
-                    )
-                  : const SizedBox.shrink(),
-              SettingsContainer(
-                title: "Allowance is Open Source!",
-                afterWidget: const Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  size: 17,
-                ),
-                icon: Icons.code,
-                onTap: () {
-                  openUrl("https://github.com/jameskokoska/Budget-Simple");
-                },
-              ),
+              //       icon: Icons.thumb_up_alt_outlined,
+              //       onTap: () {
+              //         kIsWeb
+              //             ? openUrl("https://ko-fi.com/dapperappdeveloper")
+              //             : null;
+              //       },
+              //     )
+              //   : const SizedBox.shrink(),
+              // SettingsContainer(
+              //   title: "Allowance is Open Source!",
+              //   afterWidget: const Icon(
+              //     Icons.arrow_forward_ios_rounded,
+              //     size: 17,
+              //   ),
+              //   icon: Icons.code,
+              //   onTap: () {
+              //     openUrl("https://github.com/jameskokoska/Budget-Simple");
+              //   },
+              // ),
               const Divider(),
               Center(
                 child: Padding(

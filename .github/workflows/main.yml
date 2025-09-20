@@ -8,10 +8,7 @@ on:
         description: 'Flutter SDK version'
         required: false
         default: '3.19.6'
-  # Push 事件触发（可根据实际分支名称调整）
-  push:
-    branches:
-      - main
+
 
 jobs:
   build:
