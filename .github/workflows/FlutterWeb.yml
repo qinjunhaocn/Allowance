@@ -1,6 +1,7 @@
+name: Flutter Web CI
+
 on:
-  push:
-    branches: [ main ]
+
   workflow_dispatch:
     inputs:
       flutterVersion:
