@@ -36,20 +36,20 @@ class OnBoardingPageBody extends StatefulWidget {
 }
 
 class OnBoardingPageBodyState extends State<OnBoardingPageBody> {
-  double selectedAmount = 500;
-  DateTime selectedUntilDate = dayInAMonth();
-  Future<void> _selectUntilDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: selectedUntilDate,
-        firstDate: DateTime.now().add(const Duration(days: 0)),
-        lastDate: DateTime.now().add(const Duration(days: 500)));
-    if (picked != null && picked != selectedUntilDate) {
-      setState(() {
-        selectedUntilDate = picked;
-      });
-    }
-  }
+  double selectedAmount = 0;
+  // DateTime selectedUntilDate = dayInAMonth();
+  // Future<void> _selectUntilDate(BuildContext context) async {
+  //   final DateTime? picked = await showDatePicker(
+  //       context: context,
+  //       initialDate: selectedUntilDate,
+  //       firstDate: DateTime.now().add(const Duration(days: 0)),
+  //       lastDate: DateTime.now().add(const Duration(days: 500)));
+  //   if (picked != null && picked != selectedUntilDate) {
+  //     setState(() {
+  //       selectedUntilDate = picked;
+  //     });
+  //   }
+  // }
 
   int currentIndex = 0;
 
@@ -62,7 +62,7 @@ class OnBoardingPageBodyState extends State<OnBoardingPageBody> {
           id: 1,
           amount: selectedAmount,
           dateCreated: DateTime.now(),
-          dateCreatedUntil: selectedUntilDate,
+          dateCreatedUntil: dayInAMonth(), // 使用默认的一个月后日期
         ),
       );
       hasOnboarded = true;
@@ -150,66 +150,67 @@ class OnBoardingPageBodyState extends State<OnBoardingPageBody> {
           ),
         ],
       ),
-      OnBoardPage(
-        widgets: [
-          const TextFont(
-            text: "Allowance Reset Date",
-            fontWeight: FontWeight.bold,
-            fontSize: 30,
-            textAlign: TextAlign.center,
-            maxLines: 5,
-          ),
-          const SizedBox(height: 20),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25),
-            child: TextFont(
-              text: "Select the date you want your budget to reset",
-              maxLines: 100,
-              fontSize: 18,
-              textAlign: TextAlign.center,
-            ),
-          ),
-          const SizedBox(height: 10),
-          Tappable(
-            borderRadius: 15,
-            color: Colors.transparent,
-            onTap: () {
-              _selectUntilDate(context);
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 14),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    color: Theme.of(context).colorScheme.primary,
-                    width: 1,
-                  ),
-                ),
-              ),
-              child: TextFont(
-                text: DateFormat('MMM d, yyyy').format(selectedUntilDate),
-              ),
-            ),
-          ),
-          const SizedBox(height: 40),
-          FloatingWidget(
-            duration: const Duration(milliseconds: 1900),
-            child: Transform.translate(
-              offset: const Offset(80, 0),
-              child: Transform.rotate(
-                angle: 0.1,
-                child: const SizedBox(
-                  width: 250,
-                  height: 220,
-                  child: Image(
-                    image: AssetImage('assets/onboard/hourglass.png'),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+      // 注释掉预算重置日期设置页
+      // OnBoardPage(
+      //   widgets: [
+      //     const TextFont(
+      //       text: "Allowance Reset Date",
+      //       fontWeight: FontWeight.bold,
+      //       fontSize: 30,
+      //       textAlign: TextAlign.center,
+      //       maxLines: 5,
+      //     ),
+      //     const SizedBox(height: 20),
+      //     const Padding(
+      //       padding: EdgeInsets.symmetric(horizontal: 25),
+      //       child: TextFont(
+      //         text: "Select the date you want your budget to reset",
+      //         maxLines: 100,
+      //         fontSize: 18,
+      //         textAlign: TextAlign.center,
+      //       ),
+      //     ),
+      //     const SizedBox(height: 10),
+      //     Tappable(
+      //       borderRadius: 15,
+      //       color: Colors.transparent,
+      //       onTap: () {
+      //         _selectUntilDate(context);
+      //       },
+      //       child: Container(
+      //         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 14),
+      //         decoration: BoxDecoration(
+      //           border: Border(
+      //             bottom: BorderSide(
+      //               color: Theme.of(context).colorScheme.primary,
+      //               width: 1,
+      //             ),
+      //           ),
+      //         ),
+      //         child: TextFont(
+      //           text: DateFormat('MMM d, yyyy').format(selectedUntilDate),
+      //         ),
+      //       ),
+      //     ),
+      //     const SizedBox(height: 40),
+      //     FloatingWidget(
+      //       duration: const Duration(milliseconds: 1900),
+      //       child: Transform.translate(
+      //         offset: const Offset(80, 0),
+      //         child: Transform.rotate(
+      //           angle: 0.1,
+      //           child: const SizedBox(
+      //             width: 250,
+      //             height: 220,
+      //             child: Image(
+      //               image: AssetImage('assets/onboard/hourglass.png'),
+      //             ),
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ],
+      // ),
       OnBoardPage(
         widgets: [
           const TextFont(
@@ -268,7 +269,7 @@ class OnBoardingPageBodyState extends State<OnBoardingPageBody> {
                         // We have no way to validate the entry, if a user enters too many decimals
                         // for example, they can still move on to the next step without any issues.
                         setState(() {
-                          selectedAmount = double.tryParse(value) ?? 500;
+                          selectedAmount = double.tryParse(value) ?? 0;
                         });
                       },
                       textAlign: TextAlign.center,
