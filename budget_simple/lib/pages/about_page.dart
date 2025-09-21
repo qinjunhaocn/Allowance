@@ -181,7 +181,7 @@ class AboutPage extends StatelessWidget {
               ),
               kIsWeb ? const SizedBox.shrink() : const NotificationSettings(),
               SettingsContainer(
-                title: "Reset App",
+                title: translateText("Reset App"),
                 afterWidget: const Icon(
                   Icons.arrow_forward_ios_rounded,
                   size: 17,
@@ -204,11 +204,9 @@ class AboutPage extends StatelessWidget {
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            child: const Text(
-                              "Cancel",
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
+                            child: TextFont(
+                              text: translateText("Cancel"),
+                              fontSize: 16,
                             ),
                           ),
                           TextButton(
@@ -260,11 +258,9 @@ class AboutPage extends StatelessWidget {
                                 // Fully restart the app
                                 Restart.restartApp();
                               },
-                              child: const Text(
-                                "Reset",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
+                              child: TextFont(
+                                text: translateText("Reset"),
+                                fontSize: 16,
                               ),
                             ),
                         ],
