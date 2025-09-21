@@ -176,6 +176,92 @@ class AboutPage extends StatelessWidget {
                     sharedPreferences.getBool("hapticFeedback") ?? true,
                 icon: Icons.vibration_rounded,
               ),
+              SettingsContainer(
+                title: "Reset App",
+                description: "This will erase all data and reset the app to its initial state.",
+                afterWidget: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 17,
+                ),
+                icon: Icons.restart_alt_outlined,
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const TextFont(text: "Reset App"),
+                        content: const TextFont(
+                          text: "Are you sure you want to reset the app? All your data will be erased and cannot be recovered.",
+                          fontSize: 16,
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            child: const TextFont(text: "Cancel"),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          TextButton(
+                            child: const TextFont(text: "Reset"),
+                            onPressed: () async {
+                              // Close the dialog
+                              Navigator.of(context).pop();
+                              
+                              // Show loading indicator
+                              showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (BuildContext context) {
+                                  return const AlertDialog(
+                                    title: TextFont(text: "Resetting App"),
+                                    content: SizedBox(
+                                      height: 50,
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                               
+                              try {
+                                // Clear all shared preferences
+                                await sharedPreferences.clear();
+                                
+                                // Clear all database tables
+                                await database.deleteAllTransactions();
+                                await database.deleteAllSpendingLimits();
+                                
+                                // Reset budget to 0
+                                await database.createOrUpdateSpendingLimit(
+                                  SpendingLimitData(
+                                    id: 1,
+                                    amount: 0,
+                                    dateCreated: DateTime.now(),
+                                    dateCreatedUntil: dayInAMonth(),
+                                  ),
+                                );
+                              } catch (e) {
+                                print("Error during app reset: $e");
+                              }
+                               
+                              // Close loading indicator
+                              Navigator.of(context).pop();
+                               
+                              // Restart the app
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(builder: (context) => const OnBoard()),
+                                (Route<dynamic> route) => false,
+                              );
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+              ),
               kIsWeb ? const SizedBox.shrink() : const NotificationSettings(),
               const Divider(),
               const SizedBox(height: 10),

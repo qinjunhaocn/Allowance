@@ -132,4 +132,14 @@ class TransactionsDatabase extends _$TransactionsDatabase {
           ..where((transaction) => transaction.id.equals(id)))
         .go();
   }
+  
+  // Delete all transactions
+  Future<int> deleteAllTransactions() {
+    return delete(transactions).go();
+  }
+  
+  // Delete all spending limits
+  Future<int> deleteAllSpendingLimits() {
+    return delete(spendingLimit).go();
+  }
 }
