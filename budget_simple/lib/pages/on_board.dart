@@ -1,5 +1,6 @@
 import 'package:budget_simple/database/tables.dart';
 import 'package:budget_simple/main.dart';
+import 'package:budget_simple/pages/main_page_layout.dart';
 import 'package:budget_simple/struct/database_global.dart';
 import 'package:budget_simple/widgets/floating.dart';
 import 'package:budget_simple/widgets/increase_limit.dart';
@@ -67,7 +68,17 @@ class OnBoardingPageBodyState extends State<OnBoardingPageBody> {
       );
       hasOnboarded = true;
       sharedPreferences.setBool("hasOnboarded", true);
-      initializeAppStateKey.currentState?.refreshAppState();
+      
+      // 确保应用刷新并导航到主页面
+      if (initializeAppStateKey.currentState != null) {
+        initializeAppStateKey.currentState!.refreshAppState();
+      } else {
+        // 如果刷新机制失败，使用直接导航作为备选方案
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const MainPageLayout()),
+          (Route<dynamic> route) => false,
+        );
+      }
     }
   }
 
