@@ -192,12 +192,12 @@ class AboutPage extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const TextFont(text: "Reset App"),
-                        content: const TextFont(
-                          text: "Are you sure you want to reset the app? All your data will be erased and cannot be recovered.",
-                          fontSize: 16,
-                          maxLines: 3,
-                          softWrap: true,
+                        title: TextFont(text: translateText("Reset App")),
+                      content: TextFont(
+                        text: translateText("Are you sure you want to reset the app? All your data will be erased and cannot be recovered."),
+                        fontSize: 16,
+                        maxLines: 3,
+                        softWrap: true,
                         ),
                         actions: <Widget>[
                           TextButton(
@@ -221,8 +221,8 @@ class AboutPage extends StatelessWidget {
                                   context: context,
                                   barrierDismissible: false,
                                   builder: (BuildContext context) {
-                                    return const AlertDialog(
-                                      title: TextFont(text: "Resetting App"),
+                                    return AlertDialog(
+                                        title: TextFont(text: translateText("Resetting App")),
                                       content: SizedBox(
                                         height: 50,
                                         child: Center(
