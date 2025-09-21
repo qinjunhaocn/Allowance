@@ -20,6 +20,7 @@ import 'package:budget_simple/widgets/text_font.dart';
 import 'package:budget_simple/widgets/time_digits.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:restart_app/restart_app.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -250,12 +251,8 @@ class AboutPage extends StatelessWidget {
                               // Close loading indicator
                               Navigator.of(context).pop();
                                
-                              // Restart the app
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(builder: (context) => const OnBoardingPage()),
-                                (Route<dynamic> route) => false,
-                              );
+                              // Fully restart the app
+                              Restart.restartApp();
                             },
                           ),
                         ],
