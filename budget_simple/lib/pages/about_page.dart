@@ -179,6 +179,7 @@ class AboutPage extends StatelessWidget {
                     sharedPreferences.getBool("hapticFeedback") ?? true,
                 icon: Icons.vibration_rounded,
               ),
+              kIsWeb ? const SizedBox.shrink() : const NotificationSettings(),
               SettingsContainer(
                 title: "Reset App",
                 description: "This will erase all data and reset the app to its initial state.",
@@ -209,7 +210,7 @@ class AboutPage extends StatelessWidget {
                             onPressed: () async {
                               // Close the dialog
                               Navigator.of(context).pop();
-                              
+                               
                               // Show loading indicator
                               showDialog(
                                 context: context,
@@ -226,15 +227,15 @@ class AboutPage extends StatelessWidget {
                                   );
                                 },
                               );
-                               
+                                
                               try {
                                 // Clear all shared preferences
                                 await sharedPreferences.clear();
-                                
+                                 
                                 // Clear all database tables
                                 await database.deleteAllTransactions();
                                 await database.deleteAllSpendingLimits();
-                                
+                                 
                                 // Reset budget to 0
                                 await database.createOrUpdateSpendingLimit(
                                   SpendingLimitData(
@@ -247,10 +248,10 @@ class AboutPage extends StatelessWidget {
                               } catch (e) {
                                 print("Error during app reset: $e");
                               }
-                               
+                                
                               // Close loading indicator
                               Navigator.of(context).pop();
-                               
+                                
                               // Fully restart the app
                               Restart.restartApp();
                             },
@@ -261,7 +262,6 @@ class AboutPage extends StatelessWidget {
                   );
                 },
               ),
-              kIsWeb ? const SizedBox.shrink() : const NotificationSettings(),
               const Divider(),
               const SizedBox(height: 10),
               const AboutInfoBox(
