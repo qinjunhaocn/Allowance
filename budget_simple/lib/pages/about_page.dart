@@ -209,63 +209,59 @@ class AboutPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          // 为Reset按钮添加底部padding使其微微下调
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 8),
-                            child: TextButton(
-                              onPressed: () async {
-                                  // Close the dialog
-                                  Navigator.of(context).pop();
-                                    
-                                  // Show loading indicator
-                                  showDialog(
-                                    context: context,
-                                    barrierDismissible: false,
-                                    builder: (BuildContext context) {
-                                      return const AlertDialog(
-                                        title: TextFont(text: "Resetting App"),
-                                        content: SizedBox(
-                                          height: 50,
-                                          child: Center(
-                                            child: CircularProgressIndicator(),
-                                          ),
+                          TextButton(
+                            onPressed: () async {
+                                // Close the dialog
+                                Navigator.of(context).pop();
+                                  
+                                // Show loading indicator
+                                showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (BuildContext context) {
+                                    return const AlertDialog(
+                                      title: TextFont(text: "Resetting App"),
+                                      content: SizedBox(
+                                        height: 50,
+                                        child: Center(
+                                          child: CircularProgressIndicator(),
                                         ),
-                                      );
-                                    },
-                                  );
-                                        
-                                  try {
-                                    // Clear all shared preferences
-                                    await sharedPreferences.clear();
-                                      
-                                    // Clear all database tables
-                                    await database.deleteAllTransactions();
-                                    await database.deleteAllSpendingLimits();
-                                      
-                                    // Reset budget to 0
-                                    await database.createOrUpdateSpendingLimit(
-                                      SpendingLimitData(
-                                        id: 1,
-                                        amount: 0,
-                                        dateCreated: DateTime.now(),
-                                        dateCreatedUntil: dayInAMonth(),
                                       ),
                                     );
-                                  } catch (e) {
-                                    print("Error during app reset: $e");
-                                  }
-                                        
-                                  // Close loading indicator
-                                  Navigator.of(context).pop();
-                                        
-                                  // Fully restart the app
-                                  Restart.restartApp();
-                                },
-                                child: const Text(
-                                  "Reset",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
+                                  },
+                                );
+                                    
+                                try {
+                                  // Clear all shared preferences
+                                  await sharedPreferences.clear();
+                                    
+                                  // Clear all database tables
+                                  await database.deleteAllTransactions();
+                                  await database.deleteAllSpendingLimits();
+                                    
+                                  // Reset budget to 0
+                                  await database.createOrUpdateSpendingLimit(
+                                    SpendingLimitData(
+                                      id: 1,
+                                      amount: 0,
+                                      dateCreated: DateTime.now(),
+                                      dateCreatedUntil: dayInAMonth(),
+                                    ),
+                                  );
+                                } catch (e) {
+                                  print("Error during app reset: $e");
+                                }
+                                    
+                                // Close loading indicator
+                                Navigator.of(context).pop();
+                                    
+                                // Fully restart the app
+                                Restart.restartApp();
+                              },
+                              child: const Text(
+                                "Reset",
+                                style: TextStyle(
+                                  fontSize: 16,
                                 ),
                               ),
                             ),
