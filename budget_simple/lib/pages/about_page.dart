@@ -198,36 +198,22 @@ class AboutPage extends StatelessWidget {
                           fontSize: 16,
                         ),
                         actions: <Widget>[
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.secondaryContainer,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
-                            child: Tappable(
-                              onTap: () {
-                                Navigator.of(context).pop();
-                              },
-                              color: Colors.transparent,
-                              child: TextFont(
-                                text: "Cancel",
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text(
+                              "Cancel",
+                              style: TextStyle(
+                                fontSize: 16,
                               ),
                             ),
                           ),
-                          const SizedBox(width: 10),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.secondaryContainer,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
-                            child: Tappable(
-                              onTap: () async {
+                          TextButton(
+                            onPressed: () async {
                                 // Close the dialog
                                 Navigator.of(context).pop();
-                                 
+                                  
                                 // Show loading indicator
                                 showDialog(
                                   context: context,
@@ -244,15 +230,15 @@ class AboutPage extends StatelessWidget {
                                     );
                                   },
                                 );
-                                  
+                                    
                                 try {
                                   // Clear all shared preferences
                                   await sharedPreferences.clear();
-                                   
+                                    
                                   // Clear all database tables
                                   await database.deleteAllTransactions();
                                   await database.deleteAllSpendingLimits();
-                                   
+                                    
                                   // Reset budget to 0
                                   await database.createOrUpdateSpendingLimit(
                                     SpendingLimitData(
@@ -265,20 +251,20 @@ class AboutPage extends StatelessWidget {
                                 } catch (e) {
                                   print("Error during app reset: $e");
                                 }
-                                  
+                                    
                                 // Close loading indicator
                                 Navigator.of(context).pop();
-                                  
+                                    
                                 // Fully restart the app
                                 Restart.restartApp();
                               },
-                              color: Colors.transparent,
-                              child: TextFont(
-                                  text: "Reset",
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                              child: const Text(
+                                "Reset",
+                                style: TextStyle(
+                                  fontSize: 16,
                                 ),
-                            ),
+                              ),
+                            )
                           ),
                         ],
                       );
