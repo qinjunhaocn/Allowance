@@ -199,62 +199,85 @@ class AboutPage extends StatelessWidget {
                           fontSize: 16,
                         ),
                         actions: <Widget>[
-                          TextButton(
-                            child: const TextFont(text: "Cancel"),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.secondaryContainer,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                            child: Tappable(
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              color: Colors.transparent,
+                              child: TextFont(
+                                text: "Cancel",
+                                fontSize: 15,
+                              ),
+                            ),
                           ),
-                          TextButton(
-                            child: const TextFont(text: "Reset"),
-                            onPressed: () async {
-                              // Close the dialog
-                              Navigator.of(context).pop();
-                               
-                              // Show loading indicator
-                              showDialog(
-                                context: context,
-                                barrierDismissible: false,
-                                builder: (BuildContext context) {
-                                  return const AlertDialog(
-                                    title: TextFont(text: "Resetting App"),
-                                    content: SizedBox(
-                                      height: 50,
-                                      child: Center(
-                                        child: CircularProgressIndicator(),
+                          const SizedBox(width: 10),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.secondaryContainer,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                            child: Tappable(
+                              onTap: () async {
+                                // Close the dialog
+                                Navigator.of(context).pop();
+                                 
+                                // Show loading indicator
+                                showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (BuildContext context) {
+                                    return const AlertDialog(
+                                      title: TextFont(text: "Resetting App"),
+                                      content: SizedBox(
+                                        height: 50,
+                                        child: Center(
+                                          child: CircularProgressIndicator(),
+                                        ),
                                       ),
+                                    );
+                                  },
+                                );
+                                  
+                                try {
+                                  // Clear all shared preferences
+                                  await sharedPreferences.clear();
+                                   
+                                  // Clear all database tables
+                                  await database.deleteAllTransactions();
+                                  await database.deleteAllSpendingLimits();
+                                   
+                                  // Reset budget to 0
+                                  await database.createOrUpdateSpendingLimit(
+                                    SpendingLimitData(
+                                      id: 1,
+                                      amount: 0,
+                                      dateCreated: DateTime.now(),
+                                      dateCreatedUntil: dayInAMonth(),
                                     ),
                                   );
-                                },
-                              );
-                                
-                              try {
-                                // Clear all shared preferences
-                                await sharedPreferences.clear();
-                                 
-                                // Clear all database tables
-                                await database.deleteAllTransactions();
-                                await database.deleteAllSpendingLimits();
-                                 
-                                // Reset budget to 0
-                                await database.createOrUpdateSpendingLimit(
-                                  SpendingLimitData(
-                                    id: 1,
-                                    amount: 0,
-                                    dateCreated: DateTime.now(),
-                                    dateCreatedUntil: dayInAMonth(),
-                                  ),
-                                );
-                              } catch (e) {
-                                print("Error during app reset: $e");
-                              }
-                                
-                              // Close loading indicator
-                              Navigator.of(context).pop();
-                                
-                              // Fully restart the app
-                              Restart.restartApp();
-                            },
+                                } catch (e) {
+                                  print("Error during app reset: $e");
+                                }
+                                  
+                                // Close loading indicator
+                                Navigator.of(context).pop();
+                                  
+                                // Fully restart the app
+                                Restart.restartApp();
+                              },
+                              color: Colors.transparent,
+                              child: TextFont(
+                                text: "Reset",
+                                fontSize: 15,
+                              ),
+                            ),
                           ),
                         ],
                       );
