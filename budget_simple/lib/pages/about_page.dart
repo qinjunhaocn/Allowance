@@ -264,8 +264,7 @@ class AboutPage extends StatelessWidget {
                                   fontSize: 16,
                                 ),
                               ),
-                            )
-                          ),
+                            ),
                         ],
                       );
                     },
