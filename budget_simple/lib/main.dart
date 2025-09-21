@@ -40,6 +40,8 @@ void main() async {
   } catch (e) {
     print("Accent color error");
   }
+  // 原有的预算初始化代码（已注释）
+  /*
   // Set up the initial spending goal
   try {
     await database.getSpendingLimit();
@@ -53,6 +55,17 @@ void main() async {
       ),
     );
   }
+  */
+
+  // 新添加的代码：每次打开app自动将预算设置为0
+  await database.createOrUpdateSpendingLimit(
+    SpendingLimitData(
+      id: 1,
+      amount: 0,
+      dateCreated: DateTime.now(),
+      dateCreatedUntil: dayInAMonth(),
+    ),
+  );
   tz.initializeTimeZones();
   final String locationName = await FlutterTimezone.getLocalTimezone();
   tz.setLocalLocation(tz.getLocation(locationName));
