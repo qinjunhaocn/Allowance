@@ -3,12 +3,14 @@ import 'dart:io';
 import 'package:budget_simple/database/tables.dart';
 import 'package:budget_simple/main.dart';
 import 'package:budget_simple/pages/home_page.dart';
+import 'package:budget_simple/pages/on_board.dart';
 import 'package:budget_simple/struct/colors.dart';
 import 'package:budget_simple/struct/database_global.dart';
 import 'package:budget_simple/struct/functions.dart';
 import 'package:budget_simple/struct/languages_dict.dart';
 import 'package:budget_simple/struct/notifications.dart';
 import 'package:budget_simple/struct/translations.dart';
+import 'package:budget_simple/widgets/increase_limit.dart';
 import 'package:budget_simple/widgets/page_framework.dart';
 import 'package:budget_simple/widgets/select_color.dart';
 import 'package:budget_simple/widgets/settings_container.dart';
@@ -251,7 +253,7 @@ class AboutPage extends StatelessWidget {
                               // Restart the app
                               Navigator.pushAndRemoveUntil(
                                 context,
-                                MaterialPageRoute(builder: (context) => const OnBoard()),
+                                MaterialPageRoute(builder: (context) => const OnBoardingPage()),
                                 (Route<dynamic> route) => false,
                               );
                             },
