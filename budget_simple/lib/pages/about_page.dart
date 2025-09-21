@@ -196,6 +196,8 @@ class AboutPage extends StatelessWidget {
                         content: const TextFont(
                           text: "Are you sure you want to reset the app? All your data will be erased and cannot be recovered.",
                           fontSize: 16,
+                          maxLines: 3,
+                          softWrap: true,
                         ),
                         actions: <Widget>[
                           TextButton(
