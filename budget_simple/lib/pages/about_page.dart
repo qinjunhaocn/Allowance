@@ -182,7 +182,6 @@ class AboutPage extends StatelessWidget {
               kIsWeb ? const SizedBox.shrink() : const NotificationSettings(),
               SettingsContainer(
                 title: "Reset App",
-                description: "This will erase all data and reset the app to its initial state.",
                 afterWidget: const Icon(
                   Icons.arrow_forward_ios_rounded,
                   size: 17,
@@ -204,7 +203,7 @@ class AboutPage extends StatelessWidget {
                               color: Theme.of(context).colorScheme.secondaryContainer,
                               borderRadius: BorderRadius.circular(5),
                             ),
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                            padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
                             child: Tappable(
                               onTap: () {
                                 Navigator.of(context).pop();
@@ -212,7 +211,8 @@ class AboutPage extends StatelessWidget {
                               color: Colors.transparent,
                               child: TextFont(
                                 text: "Cancel",
-                                fontSize: 15,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
@@ -222,7 +222,7 @@ class AboutPage extends StatelessWidget {
                               color: Theme.of(context).colorScheme.secondaryContainer,
                               borderRadius: BorderRadius.circular(5),
                             ),
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                            padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
                             child: Tappable(
                               onTap: () async {
                                 // Close the dialog
@@ -274,9 +274,10 @@ class AboutPage extends StatelessWidget {
                               },
                               color: Colors.transparent,
                               child: TextFont(
-                                text: "Reset",
-                                fontSize: 15,
-                              ),
+                                  text: "Reset",
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
                             ),
                           ),
                         ],
