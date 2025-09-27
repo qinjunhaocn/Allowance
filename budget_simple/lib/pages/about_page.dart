@@ -269,6 +269,92 @@ class AboutPage extends StatelessWidget {
                   );
                 },
               ),
+              SettingsContainer(
+                title: "错误反馈",
+                afterWidget: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 17,
+                ),
+                icon: Icons.feedback_outlined,
+                onTap: () {
+                  TextEditingController feedbackController = TextEditingController();
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: TextFont(text: "错误反馈"),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextFont(
+                              text: "请描述您遇到的问题：",
+                              fontSize: 16,
+                            ),
+                            const SizedBox(height: 10),
+                            TextField(
+                              controller: feedbackController,
+                              maxLines: 4,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                hintText: "请输入问题描述...",
+                              ),
+                            ),
+                          ],
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: TextFont(
+                              text: "取消",
+                              fontSize: 16,
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              // 这里可以添加提交反馈的逻辑
+                              String feedback = feedbackController.text;
+                              print("用户反馈：$feedback");
+                              Navigator.of(context).pop();
+                              // 可以在这里添加提交成功的提示
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: TextFont(text: "提交成功"),
+                                    content: TextFont(
+                                      text: "感谢您的反馈！",
+                                      fontSize: 16,
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: TextFont(
+                                          text: "确定",
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                            child: TextFont(
+                              text: "提交",
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+              ),
               const Divider(),
               const SizedBox(height: 10),
               const AboutInfoBox(
